@@ -1,6 +1,10 @@
 let bar_a, bar_b, bolita;
 let speedX=1;
 let speedY=1;
+
+let puntuaje_1 = 0;
+let puntuaje_2 = 0;
+
 function dibujarObjetos(){
     rect(bar_a.x, bar_a.y,bar_a.w, bar_a.h, 6);
     describe('bar_a');
@@ -43,6 +47,10 @@ function setup() {
 function draw(){
     background(blue);
     dibujarObjetos();
+    fill(255);      
+    textSize(20);
+    text("puntuaje 1:"+ puntuaje_1, 20, 50);
+    text("puntuaje 2:"+ puntuaje_2, 300, 50);
 
     bolita.x += speedX;
     bolita.y += speedY;
@@ -55,18 +63,18 @@ function draw(){
     if (bolita.y <= 0 || bolita.y >= height) 
         {
             speedY *= -1;
-            speedY *=1.4;
+            speedY *=1.11;
         }
     if (bolita.x <= 0 || bolita.x >= width) 
         {
             speedX *= -1;
-            speedX *=1.4;
+            speedX *=1.11;
         }
 
     if (bolita.x <= 20 && bolita.x >= bar_a.x+bar_a.w && bolita.y <= bar_a.y + +bar_a.h)
         {
             speedX *= -1;
-            speedX *=1.4;
+            speedX *=1.11;
         }
     
         bar_a.y = constrain(bar_a.y, 0, height - bar_a.h);
@@ -78,14 +86,14 @@ function draw(){
             bolita.y >= bar_a.y &&
             bolita.y <= bar_a.y + bar_a.h
         ) {speedX *= -1;
-            speedX *=1.4;}
+            speedX *=1.11;}
 
         if (
             bolita.x + bolita.w / 2 >= bar_b.x &&
             bolita.y >= bar_b.y &&
             bolita.y <= bar_b.y + bar_b.h
         ) {speedX *= -1;
-            speedX *=1.4;}
+            speedX *=1.11;}
 
     
 }
