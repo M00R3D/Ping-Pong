@@ -39,8 +39,31 @@ function setup() {
 }
 
 function draw(){
+    background(blue);
     dibujarObjetos();
 
     bolita.y -= 1;
+
     
+}
+function keyPressed(){
+    console.log(key);
+
+    switch (key) {
+        case 'w':
+            bar_a.y -= 3;
+            break;
+        case 's':
+            bar_a.y += 3;
+            break;
+        case 'ArrowUp':
+            bar_b.y -= 3;
+            break;
+        case 'ArrowDown': 
+            bar_b.y += 3;
+            break;
+        default:
+            break;
+    }
+
 }
