@@ -43,7 +43,10 @@ function draw(){
     dibujarObjetos();
 
     bolita.y -= 1;
-
+    if(keyIsDown('w')){bar_a.y -= 3;}
+    if(keyIsDown('s')){bar_a.y += 3;}
+    if(keyIsDown('ArrowUp')){bar_b.y -= 3;}
+    if(keyIsDown('ArrowDown')){bar_b.y += 3;}
     
 }
 function keyPressed(){
