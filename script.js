@@ -1,6 +1,6 @@
 let bar_a, bar_b, bolita;
-let speedX=-1;
-let speedY=5;
+let speedX=5;
+let speedY=7;
 function dibujarObjetos(){
     rect(bar_a.x, bar_a.y,bar_a.w, bar_a.h, 6);
     describe('bar_a');
@@ -48,10 +48,10 @@ function draw(){
     bolita.y += speedY;
   
 
-    if(keyIsDown('w')){bar_a.y -= 3;}
-    if(keyIsDown('s')){bar_a.y += 3;}
-    if(keyIsDown('ArrowUp')){bar_b.y -= 3;}
-    if(keyIsDown('ArrowDown')){bar_b.y += 3;}
+    if(keyIsDown('w')){bar_a.y -= 8;}
+    if(keyIsDown('s')){bar_a.y += 8;}
+    if(keyIsDown('ArrowUp')){bar_b.y -= 8;}
+    if(keyIsDown('ArrowDown')){bar_b.y += 8;}
     if (bolita.y <= 0 || bolita.y >= height) 
         {
             speedY *= -1;
@@ -66,6 +66,22 @@ function draw(){
             speedX *= -1;
         }
     
+        bar_a.y = constrain(bar_a.y, 0, height - bar_a.h);
+        bar_b.y = constrain(bar_b.y, 0, height - bar_b.h);
+
+
+        if (
+            bolita.x - bolita.w / 2 <= bar_a.x + bar_a.w &&
+            bolita.y >= bar_a.y &&
+            bolita.y <= bar_a.y + bar_a.h
+        ) {speedX *= -1;}
+
+        if (
+            bolita.x + bolita.w / 2 >= bar_b.x &&
+            bolita.y >= bar_b.y &&
+            bolita.y <= bar_b.y + bar_b.h
+        ) {speedX *= -1;}
+
     
 }
 function keyPressed(){
@@ -73,16 +89,16 @@ function keyPressed(){
 
     switch (key) {
         case 'w':
-            bar_a.y -= 3;
+            bar_a.y -= 7;
             break;
         case 's':
-            bar_a.y += 3;
+            bar_a.y += 7;
             break;
         case 'ArrowUp':
-            bar_b.y -= 3;
+            bar_b.y -= 7;
             break;
         case 'ArrowDown': 
-            bar_b.y += 3;
+            bar_b.y += 7;
             break;
         default:
             break;
