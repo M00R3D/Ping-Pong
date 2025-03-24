@@ -1,4 +1,6 @@
 let bar_a, bar_b, bolita;
+let speedX=-1;
+let speedY=5;
 function dibujarObjetos(){
     rect(bar_a.x, bar_a.y,bar_a.w, bar_a.h, 6);
     describe('bar_a');
@@ -10,19 +12,19 @@ function dibujarObjetos(){
     describe('bolita');
 }
 function setup() {
-    createCanvas(500, 500,WEBGL); 
+    createCanvas(500, 500); 
     background(blue);        
 
     
      bar_a ={
-        x:-220,
-        y:-60,
+        x:30,
+        y:60,
         w:20,
         h:150,
     }
     
      bar_b ={
-        x:200,
+        x:450,
         y:60,
         w:20,
         h:150,
@@ -42,11 +44,28 @@ function draw(){
     background(blue);
     dibujarObjetos();
 
-    bolita.y -= 1;
+    bolita.x += speedX;
+    bolita.y += speedY;
+  
+
     if(keyIsDown('w')){bar_a.y -= 3;}
     if(keyIsDown('s')){bar_a.y += 3;}
     if(keyIsDown('ArrowUp')){bar_b.y -= 3;}
     if(keyIsDown('ArrowDown')){bar_b.y += 3;}
+    if (bolita.y <= 0 || bolita.y >= height) 
+        {
+            speedY *= -1;
+        }
+    if (bolita.x <= 0 || bolita.x >= width) 
+        {
+            speedX *= -1;
+        }
+
+    if (bolita.x <= 20 && bolita.x >= bar_a.x+bar_a.w && bolita.y <= bar_a.y + +bar_a.h)
+        {
+            speedX *= -1;
+        }
+    
     
 }
 function keyPressed(){
