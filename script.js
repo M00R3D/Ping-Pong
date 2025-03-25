@@ -46,56 +46,57 @@ function setup() {
 }
 
 function draw(){
+    //Dibujar todo
     background(blue);
     dibujarObjetos();
     fill(255);      
     textSize(20);
-    text("puntuaje 1:"+ puntuaje_1, 20, 50);
-    text("puntuaje 2:"+ puntuaje_2, 300, 50);
+    text("puntuaje p1:"+ puntuaje_1, 20, 50);
+    text("puntuaje p2:"+ puntuaje_2, 300, 50);
 
+    //mover coordenadas de bolita segun la velocidad
     bolita.x += speedX;
     bolita.y += speedY;
   
-
+    //mover barras con w s y flechas
     if(keyIsDown('w')){bar_a.y -= 8;}
     if(keyIsDown('s')){bar_a.y += 8;}
     if(keyIsDown('ArrowUp')){bar_b.y -= 8;}
     if(keyIsDown('ArrowDown')){bar_b.y += 8;}
+    
+    //velocidad maxima y limite de barra a y b en coordenada y
+    speedX = constrain(speedX, -speedMax, speedMax);
+    speedY = constrain(speedY, -speedMax, speedMax);
+    bar_a.y = constrain(bar_a.y, 0, height - bar_a.h);
+    bar_b.y = constrain(bar_b.y, 0, height - bar_b.h);
+
+
+        // colision techo y suelo
     if (bolita.y <= 0 || bolita.y >= height) 
         {
             speedY *= -1;
             speedY *=1.4;
         }
+
+        // colision paredes laterales
     if (bolita.x <= 0 || bolita.x >= width) 
         {
             speedX *= -1;
             speedX *=1.4;
         }
 
-    if (bolita.x <= 20 && bolita.x >= bar_a.x+bar_a.w && bolita.y <= bar_a.y + +bar_a.h)
+// colision barra a
+        if (bolita.x - bolita.w / 2 <= bar_a.x + bar_a.w && bolita.y >= bar_a.y && bolita.y <= bar_a.y + bar_a.h) 
         {
             speedX *= -1;
             speedX *=1.4;
         }
-        speedX = constrain(speedX, -speedMax, speedMax);
-        speedY = constrain(speedY, -speedMax, speedMax);
-        bar_a.y = constrain(bar_a.y, 0, height - bar_a.h);
-        bar_b.y = constrain(bar_b.y, 0, height - bar_b.h);
-
-
-        if (
-            bolita.x - bolita.w / 2 <= bar_a.x + bar_a.w &&
-            bolita.y >= bar_a.y &&
-            bolita.y <= bar_a.y + bar_a.h
-        ) {speedX *= -1;
-            speedX *=1.4;}
-
-        if (
-            bolita.x + bolita.w / 2 >= bar_b.x &&
-            bolita.y >= bar_b.y &&
-            bolita.y <= bar_b.y + bar_b.h
-        ) {speedX *= -1;
-            speedX *=1.4;}
+// colision barra b
+        if (bolita.x + bolita.w / 2 >= bar_b.x && bolita.y >= bar_b.y && bolita.y <= bar_b.y + bar_b.h)             
+        {
+            speedX *= -1;
+            speedX *=1.4;
+        }
 
     
 }
