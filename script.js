@@ -1,6 +1,7 @@
 let bar_a, bar_b, bolita;
 let speedX=1;
 let speedY=1;
+let speedMax=10;
 
 let puntuaje_1 = 0;
 let puntuaje_2 = 0;
@@ -63,20 +64,21 @@ function draw(){
     if (bolita.y <= 0 || bolita.y >= height) 
         {
             speedY *= -1;
-            speedY *=1.11;
+            speedY *=1.4;
         }
     if (bolita.x <= 0 || bolita.x >= width) 
         {
             speedX *= -1;
-            speedX *=1.11;
+            speedX *=1.4;
         }
 
     if (bolita.x <= 20 && bolita.x >= bar_a.x+bar_a.w && bolita.y <= bar_a.y + +bar_a.h)
         {
             speedX *= -1;
-            speedX *=1.11;
+            speedX *=1.4;
         }
-    
+        speedX = constrain(speedX, -speedMax, speedMax);
+        speedY = constrain(speedY, -speedMax, speedMax);
         bar_a.y = constrain(bar_a.y, 0, height - bar_a.h);
         bar_b.y = constrain(bar_b.y, 0, height - bar_b.h);
 
@@ -86,14 +88,14 @@ function draw(){
             bolita.y >= bar_a.y &&
             bolita.y <= bar_a.y + bar_a.h
         ) {speedX *= -1;
-            speedX *=1.11;}
+            speedX *=1.4;}
 
         if (
             bolita.x + bolita.w / 2 >= bar_b.x &&
             bolita.y >= bar_b.y &&
             bolita.y <= bar_b.y + bar_b.h
         ) {speedX *= -1;
-            speedX *=1.11;}
+            speedX *=1.4;}
 
     
 }
