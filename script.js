@@ -5,6 +5,8 @@ let speedMax=10;
 
 let puntuaje_1 = 0;
 let puntuaje_2 = 0;
+let segundos=3;
+let estado = "espera";
 
 function dibujarObjetos(){
     rect(bar_a.x, bar_a.y,bar_a.w, bar_a.h, 6);
@@ -51,9 +53,20 @@ function draw(){
     dibujarObjetos();
     fill(255);      
     textSize(20);
+    text(segundos+ " segundos para continuar", 100, 150);
+    text("presiona R para Reiniciar", 100, 180);
+    
+
+    if(estado=="espera"){
+        if(segundos>0){segundos*=1;}
+        
+        bolita.x = 250;
+        bolita.y = 250;
+        bar_a.x=-50;
+        bar_b.x=-50;
+    }else{
     text("puntuaje p1:"+ puntuaje_1, 20, 50);
     text("puntuaje p2:"+ puntuaje_2, 300, 50);
-
     //mover coordenadas de bolita segun la velocidad
     bolita.x += speedX;
     bolita.y += speedY;
@@ -97,7 +110,7 @@ function draw(){
             speedX *= -1;
             speedX *=1.4;
         }
-
+    }
     
 }
 function keyPressed(){
