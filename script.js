@@ -53,18 +53,15 @@ function draw(){
     dibujarObjetos();
     fill(255);      
     textSize(20);
-    text(segundos+ " segundos para continuar", 100, 150);
-    text("presiona R para Reiniciar", 100, 180);
     
-
-    if(estado=="espera"){
-        if(segundos>0){segundos*=1;}
-        
-        bolita.x = 250;
-        bolita.y = 250;
-        bar_a.x=-50;
-        bar_b.x=-50;
-    }else{
+    if(estado=="espera")
+        {
+            text(segundos+ " segundos para continuar", 100, 150);
+            text("presiona R para Reiniciar", 100, 180);
+            if (frameCount % 60 === 0 && segundos > 0) {segundos--;}
+            if (segundos <= 0) {estado = "jugando";}
+        }
+    else if (estado === "jugando") {
     text("puntuaje p1:"+ puntuaje_1, 20, 50);
     text("puntuaje p2:"+ puntuaje_2, 300, 50);
     //mover coordenadas de bolita segun la velocidad
@@ -92,10 +89,13 @@ function draw(){
         }
 
         // colision paredes laterales
-    if (bolita.x <= 0 || bolita.x >= width) 
+    if (bolita.x <= 0 ) 
         {
-            speedX *= -1;
-            speedX *=1.4;
+            addPointB();
+        }
+    if ( bolita.x >= width) 
+        {
+            addPointA();
         }
 
 // colision barra a
@@ -129,8 +129,45 @@ function keyPressed(){
         case 'ArrowDown': 
             bar_b.y += 7;
             break;
+            case 'r':  // Ahora la tecla R reinicia el juego
+            restart();
+            break;
         default:
             break;
     }
 
+}
+function restart() {
+    puntuaje_1 = 0;
+    puntuaje_2 = 0;
+    estado = "espera";
+    segundos = 3;
+
+    bar_a = { x: 30, y: 175, w: 20, h: 150 };
+    bar_b = { x: 450, y: 175, w: 20, h: 150 };
+    bolita = { x: 250, y: 250, w: 10, h: 10 };
+
+    speedX = random([-3, 3]);
+    speedY = random([-3, 3]);
+}
+
+function addPointA() {
+    puntuaje_1 ++;
+    estado = "espera";
+    segundos = 3;
+    bar_a = { x: 30, y: 175, w: 20, h: 150 };
+    bar_b = { x: 450, y: 175, w: 20, h: 150 };
+    bolita = { x: 250, y: 250, w: 10, h: 10 };
+    speedX = random([-3, 3]);
+    speedY = random([-3, 3]);
+}
+function addPointB() {
+    puntuaje_2 ++;
+    estado = "espera";
+    segundos = 3;
+    bar_a = { x: 30, y: 175, w: 20, h: 150 };
+    bar_b = { x: 450, y: 175, w: 20, h: 150 };
+    bolita = { x: 250, y: 250, w: 10, h: 10 };
+    speedX = random([-3, 3]);
+    speedY = random([-3, 3]);
 }
