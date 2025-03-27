@@ -8,6 +8,7 @@ let puntuaje_2 = 0;
 let segundos=3;
 let estado = "espera";
 
+let textoWin="";
 function dibujarObjetos(){
     rect(bar_a.x, bar_a.y,bar_a.w, bar_a.h, 6);
     describe('bar_a');
@@ -40,8 +41,8 @@ function setup() {
      bolita={
         x:60,
         y:60,
-        w:6,
-        h:6,
+        w:10,
+        h:10,
     }
     dibujarObjetos();
 
@@ -58,6 +59,7 @@ function draw(){
         {
             text(segundos+ " segundos para continuar", 100, 150);
             text("presiona R para Reiniciar", 100, 180);
+            text(textoWin, 100, 220);
             if (frameCount % 60 === 0 && segundos > 0) {segundos--;}
             if (segundos <= 0) {estado = "jugando";}
         }
@@ -140,6 +142,7 @@ function keyPressed(){
 function restart() {
     puntuaje_1 = 0;
     puntuaje_2 = 0;
+    textoWin=""
     estado = "espera";
     segundos = 3;
 
@@ -160,6 +163,7 @@ function addPointA() {
     bolita = { x: 250, y: 250, w: 10, h: 10 };
     speedX = random([-3, 3]);
     speedY = random([-3, 3]);
+    textoWin="Punto para el jugador 1"
 }
 function addPointB() {
     puntuaje_2 ++;
@@ -170,4 +174,5 @@ function addPointB() {
     bolita = { x: 250, y: 250, w: 10, h: 10 };
     speedX = random([-3, 3]);
     speedY = random([-3, 3]);
+    textoWin="Punto para el jugador 2"
 }
