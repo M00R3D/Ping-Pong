@@ -4,7 +4,7 @@ let speedY=1;
 let speedMax=10;
 
 let puntuaje_1 = 0;
-let puntuaje_2 = 0;
+let puntuaje_2 = 4;
 let segundos=3;
 let estado = "espera";
 
@@ -112,6 +112,10 @@ function draw(){
             speedX *= -1;
             speedX *=1.4;
         }
+    } else if (estado === "terminado") {
+        text("¡" + textoWin + " ganó!", 150, 150);
+        text("Presiona R para reiniciar", 130, 200);
+        if(keyPressed('ArrowDown')){restart();}
     }
     
 }
@@ -163,7 +167,12 @@ function addPointA() {
     bolita = { x: 250, y: 250, w: 10, h: 10 };
     speedX = random([-3, 3]);
     speedY = random([-3, 3]);
-    textoWin="Punto para el jugador 1"
+    if (puntuaje_1 >= 5) {
+        estado = "terminado";
+        textoWin = "Jugador 1";
+    } else {
+        resetRound("Punto para el jugador 1");
+    }
 }
 function addPointB() {
     puntuaje_2 ++;
@@ -174,5 +183,24 @@ function addPointB() {
     bolita = { x: 250, y: 250, w: 10, h: 10 };
     speedX = random([-3, 3]);
     speedY = random([-3, 3]);
-    textoWin="Punto para el jugador 2"
+    if (puntuaje_2 >= 5) {
+        estado = "terminado";
+        textoWin = "Jugador 2";
+    } else {
+        resetRound("Punto para el jugador 2");
+    }
+}
+
+
+function resetRound(msg) {
+    estado = "espera";
+    segundos = 3;
+    textoWin = msg;
+
+    bar_a = { x: 30, y: 175, w: 20, h: 150 };
+    bar_b = { x: 450, y: 175, w: 20, h: 150 };
+    bolita = { x: 250, y: 250, w: 10, h: 10 };
+    
+    speedX = random([-3, 3]);
+    speedY = random([-3, 3]);
 }
