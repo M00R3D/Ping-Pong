@@ -4,7 +4,7 @@ let speedY=1;
 let speedMax=10;
 
 let puntuaje_1 = 0;
-let puntuaje_2 = 4;
+let puntuaje_2 = 0;
 let segundos=3;
 let estado = "espera";
 
